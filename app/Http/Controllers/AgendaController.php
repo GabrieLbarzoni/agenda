@@ -9,10 +9,18 @@ use App\Models\Contato;
 class AgendaController extends Controller
 
 {
-    public function index() {
+    public function index(Request $request) {
+        $search = $request->input('search');
+        if ($search) {
+            $contatos = Contato::where(function ($query) use ($search) {
+                $query->where('nome', 'like', '%' . $search . '%');
+                $query->orWhere('telefone', 'like', '%' . $search . '%');
+            })->get();
+        } else {
+            $contatos = Contato::all();
+        }
 
-        $contatos = Contato::all();
-        return view('index', ['contatos' => $contatos]);
+        return view('index', ['contatos' => $contatos, 'search' => $search]);
     }
 
     public function create() {
@@ -20,10 +28,38 @@ class AgendaController extends Controller
     }
 
     public function store(Request $request) {
+       Contato::create($request->all());
+       return redirect('/');
+    }
 
-        Contato::create($request->all());
+    public function edit($id){
+        $contatos = Contato::where('id',$id)->first();
+        return view('edit', ['contatos' => $contatos]);
+        /*dd($contatos);*/
+    }
 
-        return redirect('/login');
+    public function update(Request $request, $id){
+
+        $data = [
+           'nome' => $request->nome,
+           'telefone' => $request->telefone,
+           'email' => $request->email,
+           'cep' => $request->cep,
+           'rua' => $request->rua,
+           'numero' => $request->umero,
+           'complemento' => $request->cmplemento,
+           'bairro' => $request->bairro,
+           'cidade' => $request->cidade,
+           'estado' => $request->estado,
+           'nota' => $request->nota
+        ];
+        Contato::where('id',$id)->update($data);
+        return redirect('/');
+    }
+
+    public function destroy($id) {
+        Contato::where('id',$id)->delete();
+        return redirect('/');
     }
 }
 
@@ -41,5 +77,9 @@ $contatos = new Contato;
         $contatos->cidade = $request->cidade;
         $contatos->estado = $request->estado;
         $contatos->nota = $request->nota;
+        $contatos->updated_at = now();
 
-        $contatos->save(); */
+
+        $contatos->save();
+
+        return redirect('/login');*/

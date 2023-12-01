@@ -23,86 +23,52 @@
                     @endif
                     <form action="{{route('contatos-store')}}" method="POST">
                         @csrf
-                        <div class="form-group {{ $errors->has('nome') ? 'has-error' : ''}}">
+                        <div class="form-group">
                             <label class="control-label">Nome <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="nome" value="{{ old('nome') }}">
-                            <span class="help-block">{{ $errors->first('nome') }}</span>
+                            <input type="text" class="form-control" name="nome" value="">
                         </div>
-                        <div class="form-group {{ $errors->has('telefone') ? 'has-error' : ''}}">
+                        <div class="form-group">
                             <label class="control-label">Telefone <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="telefone" value="{{ old('telefone') }}">
-                            <span class="help-block">{{ $errors->first('telefone') }}</span>
+                            <input type="text" class="form-control" name="telefone" value="">
                         </div>
-                        <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
-                            <label class="control-label">E-mail
-                            <input type="email" class="form-control" name="email" size="70" value="{{ old('email') }}">
-                            <span class="help-block">{{ $errors->first('email') }}</span>
+                        <div class="form-group">
+                            <label class="control-label">E-mail</label>
+                            <input type="email" class="form-control" name="email" size="70" value="">
                         </div>
-                        <div id="div-cep" class="form-group div-endereco {{ $errors->has('cep') ? 'has-error' : ''}}">
+                        <div id="div-cep" class="form-group">
                             <label class="control-label">CEP
-                            <input type="text" class="form-control" id="cep" name="cep" value="{{ old('cep') }}">
-                            <span class="help-block msg-endereco" id="msg-cep">{{ $errors->first('cep') }}</span>
-                        </div>
-                        <div class="form-group div-endereco {{ $errors->has('logradouro') ? 'has-error' : ''}}">
-                            <label class="control-label">
-                                Rua
-                                <span class="fa fa-spinner fa-spin spinner-endereco" style="display: none"></span>
-                            </label>
-                            <input type="text" class="form-control" id="rua" name="rua"
-                                value="{{ old('rua') }}">
-                            <span class="help-block msg-endereco">{{ $errors->first('rua') }}</span>
+                            <input type="text" class="form-control" id="cep" name="cep"  onblur="pesquisacep(this.value);">
                         </div>
                         <div class="form-group div-endereco">
-                            <label class="control-label">
-                                Nº
-                                <span class="fa fa-spinner fa-spin spinner-endereco" style="display: none"></span>
-                            </label>
-                            <input type="text" class="form-control" id="numero" name="numero"
-                                value="{{ old('numero') }}">
-                            <span class="help-block msg-endereco">{{ $errors->first('numero') }}</span>
+                            <label class="control-label">Rua</label>
+                            <input type="text" class="form-control" id="rua" name="rua" value="">
                         </div>
                         <div class="form-group div-endereco">
-                            <label class="control-label">
-                                Complemento
-                                <span class="fa fa-spinner fa-spin spinner-endereco" style="display: none"></span>
-                            </label>
-                            <input type="text" class="form-control" id="complemento" name="complemento"
-                                value="{{ old('complemento') }}">
-                            <span class="help-block msg-endereco">{{ $errors->first('complemento') }}</span>
+                            <label class="control-label">Nº</label>
+                            <input type="text" class="form-control" id="numero" name="numero" value="">
                         </div>
-                        <div class="form-group div-endereco {{ $errors->has('bairro') ? 'has-error' : ''}}">
-                            <label class="control-label">
-                                Bairro
-                                <span class="fa fa-spinner fa-spin spinner-endereco" style="display: none"></span>
-                            </label>
-                            <input type="text" class="form-control" id="bairro" name="bairro" value="{{ old('bairro') }}">
-                            <span class="help-block msg-endereco">{{ $errors->first('bairro') }}</span>
+                        <div class="form-group div-endereco">
+                            <label class="control-label">Complemento</label>
+                            <input type="text" class="form-control" id="complemento" name="complemento" value="">
                         </div>
-                        <div class="form-group div-endereco {{ $errors->has('localidade') ? 'has-error' : ''}}">
-                            <label class="control-label">
-                                Cidade
-                                <span class="fa fa-spinner fa-spin spinner-endereco" style="display: none"></span>
-                            </label>
-                            <input type="text" class="form-control" id="cidade" name="cidade"
-                                value="{{ old('cidade') }}">
-                            <span class="help-block msg-endereco">{{ $errors->first('cidade') }}</span>
+                        <div class="form-group div-endereco">
+                            <label class="control-label">Bairro</label>
+                            <input type="text" class="form-control" id="bairro" name="bairro" value="">
                         </div>
-                        <div class="form-group div-endereco {{ $errors->has('estado') ? 'has-error' : ''}}">
-                            <label class="control-label">
-                                Estado
-                                <span class="fa fa-spinner fa-spin spinner-endereco" style="display: none"></span>
-                            </label>
-                            <input type="text" class="form-control" id="uf" name="estado" value="{{ old('estado') }}">
-                            <span class="help-block msg-endereco">{{ $errors->first('uf') }}</span>
+                        <div class="form-group div-endereco">
+                            <label class="control-label">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" name="cidade" value="">
                         </div>
-                        <div class="form-group {{ $errors->has('nota') ? 'has-error' : ''}}">
-                            <label class="control-label">Nota:
-                            <textarea name="nota" class="form-control" cols="150" rows="3" value="{{ old('nota') }}"></textarea>
-                            <span class="help-block">{{ $errors->first('nota') }}</span>
+                        <div class="form-group div-endereco">
+                            <label class="control-label">Estado</label>
+                            <input type="text" class="form-control" id="uf" name="estado" value="">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Nota:</label>
+                            <textarea name="nota" class="form-control" cols="150" rows="3" value=""></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-lg" id="btn-submit"><i class="fas fa-plus"></i> Cadastrar
-                        </button>
+                        <button type="submit" class="btn btn-success btn-lg" id="btn-submit">Cadastrar</button>
                     </form>
                 </div>
             </div>
@@ -113,5 +79,5 @@
 @endsection
 
 @section("js")
-    <script src="{{asset('js/App/ViaCep.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/ViaCep.js')}}" type="text/javascript"></script>
 @endsection
