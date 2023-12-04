@@ -42,6 +42,11 @@ Já possui contatos cadastrados para poder testar.
  
  **Senha:** mesa1234
 
+API CEP    
+=============
+
+É só escrever o CEP no campo indicado e apertar um tab e ele preencherá as informações do endereço.
+
 API REST JSON "lista contatos"
 =============
 
