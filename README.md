@@ -45,7 +45,7 @@ Já possui contatos cadastrados para poder testar.
 API CEP    
 =============
 
-É só escrever o CEP no campo indicado e apertar um tab e ele preencherá as informações do endereço.
+É só escrever o CEP no campo indicado e apertar "tab" e ele preencherá as informações do endereço.
 
 API REST JSON "lista contatos"
 =============
